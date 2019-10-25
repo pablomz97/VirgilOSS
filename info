@@ -1,0 +1,8 @@
+embed = discord.Embed()
+embed.set_image(url="attachment://image.png")
+with open('some_image.png', 'rb') as f:
+    buffer = io.BytesIO(f.read())
+
+data = await client.http.send_file(channel.id, buffer, guild_id=channel.server.id,
+                                   filename='image.png', embed=embed.to_dict())
+returned_message = client.connection._create_message(channel=channel, **data)
